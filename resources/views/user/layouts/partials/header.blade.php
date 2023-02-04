@@ -89,6 +89,7 @@
                                     @else
                                     <li><a href="{{ route('users.login') }}">Login</a></li>
                                     <li><a href="{{ route('users.register') }}">Register</a></li>
+                                    <li><a href="{{ route('sellers.index') }}">Your Seller Account</a></li>
                                 @endauth
                                 </ul>
 

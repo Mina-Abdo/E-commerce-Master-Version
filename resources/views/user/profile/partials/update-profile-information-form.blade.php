@@ -1,4 +1,4 @@
-<section>
+<section class="m-t-150 container p-3 border border-3 border-grey">
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
@@ -33,7 +33,7 @@
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('Your email address is unverified.') }}
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <button form="send-verification" class="stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button class="stext-101 cl0 w-25 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">{{ __('Save') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -62,3 +62,19 @@
         </div>
     </form>
 </section>
+
+{{-- <!-- Name -->
+<div class=" m-b-20 how-pos4-parent">
+    <label class="m-b-25" for="name" :value="__('Name')"></label>
+    <input class="border-grey stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="name" type="text" name="name"
+        :value="old('name')" required autofocus placeholder="Name">
+    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+</div>
+
+<!-- Email -->
+<div class=" m-b-20 how-pos4-parent">
+    <label for="email" :value="__('Email')"></label>
+    <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
+        :value="old('email')" required placeholder="Your Email Address">
+    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+</div> --}}
