@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="{{asset('dashboard-assets/dist/css/index.css')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <!-- frontend links -->
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend-assets/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend-assets/css/util.css')}}">
 
 
     @stack('links')

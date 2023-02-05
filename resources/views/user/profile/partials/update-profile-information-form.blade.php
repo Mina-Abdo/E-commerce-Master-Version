@@ -63,18 +63,3 @@
     </form>
 </section>
 
-{{-- <!-- Name -->
-<div class=" m-b-20 how-pos4-parent">
-    <label class="m-b-25" for="name" :value="__('Name')"></label>
-    <input class="border-grey stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="name" type="text" name="name"
-        :value="old('name')" required autofocus placeholder="Name">
-    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-</div>
-
-<!-- Email -->
-<div class=" m-b-20 how-pos4-parent">
-    <label for="email" :value="__('Email')"></label>
-    <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
-        :value="old('email')" required placeholder="Your Email Address">
-    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-</div> --}}

@@ -1,4 +1,4 @@
-<x-app-seller-layout>
+{{-- <x-app-seller-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
@@ -14,32 +14,27 @@
             </div>
         </div>
     </div>
-</x-app-seller-layout>
+</x-app-seller-layout> --}}
+
+@extends('seller.layouts.parent')
+
+@section('title' , 'Home')
+
+@section('header')
+    @include('seller.layouts.partials.header')
+@endsection
+
+@section('footer')
+    @include('seller.layouts.partials.footer')
+@endsection
 
 @section('content')
     @parent
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+    <div class="content-wraper container" style="margin-top: 10vh; margin-bottom: 2vh;">
 
         <!-- Main content -->
-        <section class="content">
+        <section class="content ">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
@@ -176,7 +171,7 @@
                                             <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg"
+                                        <img class="direct-chat-img" src="{{asset('dashboard-assets/dist/img/user1-128x128.jpg')}}"
                                             alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
@@ -193,7 +188,7 @@
                                             <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg"
+                                        <img class="direct-chat-img" src="{{asset('dashboard-assets/dist/img/user3-128x128.jpg')}}"
                                             alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
@@ -210,7 +205,7 @@
                                             <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg"
+                                        <img class="direct-chat-img" src="{{asset('dashboard-assets/dist/img/user1-128x128.jpg')}}"
                                             alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
@@ -227,7 +222,7 @@
                                             <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
                                         </div>
                                         <!-- /.direct-chat-infos -->
-                                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg"
+                                        <img class="direct-chat-img" src="{{asset('dashboard-assets/dist/img/user3-128x128.jpg')}}"
                                             alt="message user image">
                                         <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
@@ -245,7 +240,7 @@
                                     <ul class="contacts-list">
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user1-128x128.jpg"
+                                                <img class="contacts-list-img" src="{{asset('dashboard-assets/dist/img/user1-128x128.jpg')}}"
                                                     alt="User Avatar">
 
                                                 <div class="contacts-list-info">
@@ -262,7 +257,7 @@
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user7-128x128.jpg"
+                                                <img class="contacts-list-img" src="{{asset('dashboard-assets/dist/img/user7-128x128.jpg')}}"
                                                     alt="User Avatar">
 
                                                 <div class="contacts-list-info">
@@ -278,7 +273,7 @@
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user3-128x128.jpg"
+                                                <img class="contacts-list-img" src="{{asset('dashboard-assets/dist/img/user3-128x128.jpg')}}"
                                                     alt="User Avatar">
 
                                                 <div class="contacts-list-info">
@@ -294,7 +289,7 @@
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user5-128x128.jpg"
+                                                <img class="contacts-list-img" src="{{asset('dashboard-assets/dist/img/user5-128x128.jpg')}}"
                                                     alt="User Avatar">
 
                                                 <div class="contacts-list-info">
@@ -310,7 +305,7 @@
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user6-128x128.jpg"
+                                                <img class="contacts-list-img" src="{{asset('dashboard-assets/dist/img/user6-128x128.jpg')}}"
                                                     alt="User Avatar">
 
                                                 <div class="contacts-list-info">
@@ -326,7 +321,7 @@
                                         <!-- End Contact Item -->
                                         <li>
                                             <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user8-128x128.jpg"
+                                                <img class="contacts-list-img" src="{{asset('dashboard-assets/dist/img/user8-128x128.jpg')}}"
                                                     alt="User Avatar">
 
                                                 <div class="contacts-list-info">
