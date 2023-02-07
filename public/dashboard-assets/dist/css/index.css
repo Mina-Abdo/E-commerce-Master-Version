@@ -10,9 +10,10 @@
 }
 
 .bg-index{
-    background-image: url('https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-image: url('https://images.pexels.com/photos/3944405/pexels-photo-3944405.jpeg');
     height:100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
 }

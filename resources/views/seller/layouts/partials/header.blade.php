@@ -145,7 +145,7 @@
                     <ul class="main-menu">
                         <li>
                             <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
-                                style="font-size: 2rem">
+                                style="font-size: 1.5rem">
                                 <i class="zmdi zmdi-account"></i>
                             </a>
 

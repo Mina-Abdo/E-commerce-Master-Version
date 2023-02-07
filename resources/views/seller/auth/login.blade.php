@@ -3,9 +3,8 @@
 
 @section('title', 'Login')
 
-<div class="container d-flex justify-content-center pt-5">
+<div class="container d-flex justify-content-center m-t-200">
     <div class="register-box shadow p-3 mb-5 bg-body rounded">
-        <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Login to your seller account</p>
 
@@ -77,7 +76,5 @@
                 @endif
             </div>
             <!-- /.form-box -->
-        </div>
-        <!-- /.card -->
     </div>
 </div>

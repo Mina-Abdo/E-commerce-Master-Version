@@ -1,4 +1,4 @@
-<section class="space-y-6">
+<section class="shadow m-tb-120 p-3">
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Delete Account') }}
@@ -46,7 +46,7 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ml-3">
+                <x-danger-button class="ml-3 m-t-30">
                     {{ __('Delete Account') }}
                 </x-danger-button>
             </div>
