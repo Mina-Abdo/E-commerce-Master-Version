@@ -17,16 +17,28 @@
         @csrf
         @method('patch')
 
+        <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <input id="name" name="name" type="text" class="mt-1 block w-full" value="{{old('name', $user->name)}}" required autofocus autocomplete="name"  />
+                @if ($errors->get('name'))
+                    <ul class='text-danger  space-y-1 mt-2'>
+                        @foreach ($errors->get('name') as $message)
+                            <p class="text-danger">{{ $message }}</p>
+                        @endforeach
+                    </ul>
+                @endif
         </div>
 
+        <!-- Email -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="email" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <input id="email" name="email" type="email" class="mt-1 block w-full" value="{{old('email', $user->email)}}" required autocomplete="email" />
+                @if ($errors->get('email'))
+                    <ul class='text-danger  space-y-1 mt-2'>
+                        @foreach ($errors->get('email') as $message)
+                            <p class="text-danger">{{ $message }}</p>
+                        @endforeach
+                    </ul>
+                @endif
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -55,7 +67,7 @@
                     x-data="{ show: true }"
                     x-show="show"
                     x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
+                    x-init="setTimeout(() => show = false, 5000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
                 >{{ __('Saved.') }}</p>
             @endif

@@ -40,7 +40,7 @@
 @stack('links')
 
 </head>
-<body class="animsition">
+<body >
 
 @yield('header')
 

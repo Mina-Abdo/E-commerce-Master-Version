@@ -52,7 +52,7 @@
 @section('content')
     @parent
 
-    <div class="container">
+    <div class="container" style="width: 90%">
         @include('seller.profile.partials.update-profile-information-form')
 
         @include('seller.profile.partials.update-password-form')

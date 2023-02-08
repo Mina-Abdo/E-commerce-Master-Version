@@ -3,7 +3,7 @@
 
 @section('title', 'Login')
 
-<div class="container d-flex justify-content-center m-t-200">
+<div class="container d-flex justify-content-center m-t-100">
     <div class="register-box shadow p-3 mb-5 bg-body rounded">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Login to your seller account</p>

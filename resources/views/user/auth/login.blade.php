@@ -34,20 +34,33 @@
             <h4 class="mtext-105 cl2 txt-center p-b-30">
                 User Login
             </h4>
-
+            <!-- Email -->
             <div class="bor8 m-b-20 how-pos4-parent">
-                <label for="email" :value="__('Email')"></label>
                 <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
-                    :value="old('email')" required autofocus placeholder="Your Email Address">
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
+                    value="{{old('email')}}" required autofocus placeholder="Your Email Address">
 
-            <div class="bor8 m-b-20 how-pos4-parent">
-                <label for="password" :value="__('Password')"></label>
+            </div>
+            @if ($errors->get('email'))
+                    <ul class='text-sm text-red-600 dark:text-red-400  m-t-20'>
+                        @foreach ($errors->get('email') as $message)
+                            <p class="text-danger">{{ $message }}</p>
+                        @endforeach
+                    </ul>
+                @endif
+
+            <!-- Password -->
+            <div class="bor8 m-tb-20 how-pos4-parent">
                 <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password"type="password" name="password"
                     required autocomplete="current-password" placeholder="Your Password">
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
             </div>
+            @if ($errors->get('password'))
+                    <ul class='text-danger  space-y-1 mt-20'>
+                        @foreach ($errors->get('password') as $message)
+                            <p class="text-danger">{{ $message }}</p>
+                        @endforeach
+                    </ul>
+                @endif
 
             <!-- Remember Me -->
             <div class="mb-3 form-check d-flex justify-content-around  mt-4">

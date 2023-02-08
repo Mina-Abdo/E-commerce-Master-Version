@@ -38,7 +38,7 @@
 
 @section('content')
 @parent
-<div class="container m-tb-200">
+<div class="container m-tb-100">
     <div class="m-auto size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
         <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard-assets/dist/css/adminlte.min.css') }}">
 @endpush
 
-<div class="container d-flex justify-content-center m-t-200">
+<div class="container d-flex justify-content-center m-t-100">
     <div class="register-box shadow p-3 mb-5 bg-body rounded">
         <div class="card-body register-card-body">
             <p class="login-box-msg">Register a new membership</p>
@@ -26,8 +26,7 @@
                         </div>
                     </div>
                     @if ($errors->get('name'))
-                        <ul
-                            {{ $attributes->merge(['class' => 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2']) }}>
+                        <ul class = 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
                             @foreach ($errors->get('name') as $message)
                                 <li class="text-danger">{{ $message }}</li>
                             @endforeach

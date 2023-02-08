@@ -1,5 +1,5 @@
 <!-- Header -->
-<header>
+<header >
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
@@ -26,7 +26,7 @@
         </div>
 
         <div class="wrap-menu-desktop">
-            <nav class="limiter-menu-desktop container">
+            <nav class="limiter-menu-desktop container" style="width: 90%">
 
                 <!-- Logo desktop -->
                 <a href="#" class="logo">
@@ -118,9 +118,36 @@
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
 
+
+
             <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
                 <i class="zmdi zmdi-favorite-outline"></i>
             </a>
+
+            <ul class="main-menu">
+                <li >
+                    <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" style="font-size: 2rem">
+                        <i class="zmdi zmdi-account"></i>
+                    </a>
+
+                    <ul class="sub-menu">
+                        @auth('web')
+                        <li><a href="{{route('users.profile.edit')}}">Profile</a></li>
+                        <form method="POST" action="{{ route('users.logout') }}">
+                            @csrf
+                            <li><a href="route('users.logout')"
+                                onclick="event.preventDefault();
+                                    this.closest('form').submit();">Logout</a></li>
+                        </form>
+                        @else
+                        <li><a href="{{ route('users.login') }}">Login</a></li>
+                        <li><a href="{{ route('users.register') }}">Register</a></li>
+                        <li><a href="{{ route('sellers.index') }}">Your Seller Account</a></li>
+                    @endauth
+                    </ul>
+
+                </li>
+            </ul>
 
 
         </div>

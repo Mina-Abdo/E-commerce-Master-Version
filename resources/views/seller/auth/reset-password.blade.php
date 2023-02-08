@@ -56,7 +56,7 @@
                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
                     <!-- Email Address -->
                     <div class="input-group mb-3">
-                        <input class="form-control" type="email" name="email" :value="old('email' , $request->email)" required autofocus placeholder="Email">
+                        <input class="form-control" type="email" name="email" value="{{$request->input('email')}}" required autofocus placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

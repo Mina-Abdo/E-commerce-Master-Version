@@ -5,7 +5,7 @@
     <div class="container-menu-desktop shadow bg-white" >
 
         <div class="wrap-menu-desktop" style="top:0; background-color: white; width:100%;">
-            <nav class="limiter-menu-desktop container">
+            <nav class="limiter-menu-desktop mx-auto" style="width: 90%">
 
                 <!-- Logo desktop -->
                 <a href="#" class="logo">
@@ -142,31 +142,33 @@
                             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                         </div>
                     </li>
-                    <ul class="main-menu">
-                        <li>
-                            <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
-                                style="font-size: 1.5rem">
-                                <i class="zmdi zmdi-account"></i>
-                            </a>
+                    <li class="nav-item dropdown">
+                        <ul class="main-menu">
+                            <li>
+                                <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
+                                    style="font-size: 1.5rem">
+                                    <i class="zmdi zmdi-account"></i>
+                                </a>
 
-                            <ul class="sub-menu">
-                                @auth('seller')
-                                    <li><a href="{{ route('sellers.profile.edit') }}">Profile</a></li>
-                                    <form method="POST" action="{{ route('sellers.logout') }}">
-                                        @csrf
-                                        <li><a href="route('sellers.logout')"
-                                                onclick="event.preventDefault();
-                                                this.closest('form').submit();">Logout</a>
-                                        </li>
-                                    </form>
-                                @else
-                                    <li><a href="{{ route('sellers.login') }}">Login</a></li>
-                                    <li><a href="{{ route('sellers.register') }}">Register</a></li>
-                                @endauth
-                            </ul>
+                                <ul class="sub-menu">
+                                    @auth('seller')
+                                        <li><a href="{{ route('sellers.profile.edit') }}">Profile</a></li>
+                                        <form method="POST" action="{{ route('sellers.logout') }}">
+                                            @csrf
+                                            <li><a href="route('sellers.logout')"
+                                                    onclick="event.preventDefault();
+                                                    this.closest('form').submit();">Logout</a>
+                                            </li>
+                                        </form>
+                                    @else
+                                        <li><a href="{{ route('sellers.login') }}">Login</a></li>
+                                        <li><a href="{{ route('sellers.register') }}">Register</a></li>
+                                    @endauth
+                                </ul>
 
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </li>
 
                 </div>
             </nav>
@@ -196,6 +198,33 @@
                 data-notify="0">
                 <i class="zmdi zmdi-favorite-outline"></i>
             </a>
+            <li class="nav-item dropdown">
+                <ul class="main-menu">
+                    <li>
+                        <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
+                            style="font-size: 1.5rem">
+                            <i class="zmdi zmdi-account"></i>
+                        </a>
+
+                        <ul class="sub-menu">
+                            @auth('seller')
+                                <li><a href="{{ route('sellers.profile.edit') }}">Profile</a></li>
+                                <form method="POST" action="{{ route('sellers.logout') }}">
+                                    @csrf
+                                    <li><a href="route('sellers.logout')"
+                                            onclick="event.preventDefault();
+                                            this.closest('form').submit();">Logout</a>
+                                    </li>
+                                </form>
+                            @else
+                                <li><a href="{{ route('sellers.login') }}">Login</a></li>
+                                <li><a href="{{ route('sellers.register') }}">Register</a></li>
+                            @endauth
+                        </ul>
+
+                    </li>
+                </ul>
+            </li>
 
 
         </div>
