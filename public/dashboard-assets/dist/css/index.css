@@ -17,3 +17,10 @@
     background-size: cover;
     overflow: hidden;
 }
+
+.navbar-fixed{
+    position: sticky;
+    z-index: 11000;
+    top: 0px;
+    transition: height 0.3s, background-color 0.3s;
+}

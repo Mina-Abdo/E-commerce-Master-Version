@@ -29988,4 +29988,11 @@ a.text-muted:hover {
 .dark-mode .border-dark {
   border-color: #4b545c !important;
 }
+
+.navbar-fixed{
+    position: sticky;
+    z-index: 11000;
+    top: 0px;
+    transition: height 0.3s, background-color 0.3s;
+}
 /*# sourceMappingURL=adminlte.core.css.map */
