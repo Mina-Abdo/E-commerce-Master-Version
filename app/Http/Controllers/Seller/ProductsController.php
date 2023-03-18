@@ -42,7 +42,15 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request->validated());
+        $code = product_code($request->name['en']);
+        $product = Product::create(array_merge($request->validated() ,
+        [
+            'code'=> $code,
+            'seller_id' => Auth::guard('seller')->id(),
+        ]));
+        $product->addMediaFromRequest('image')->toMediaCollection('product');
+        //add specs
+        return redirect()->route('sellers.products.index')->with('success' , __('general.messages.created'));
     }
 
     /**
@@ -53,9 +61,6 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = Product::where('seller_id', Auth::guard('seller')->id())->where('id' , $id)->get();
-        $category = Category::where('id', $product[0]->category_id)->get();
-        // $id = 1;
         return view('seller.products.show', compact(['product' , 'category']) );
     }
 
@@ -65,11 +70,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::where('seller_id', Auth::guard('seller')->id() , 'id' , $id)->get();
-        $id = 1;
-        return view('seller.products.edit', compact(['product'=>'product= ' . $id , $product]) );
+        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
+        return view('seller.products.edit' , compact(['product' , 'categories']));
     }
 
     /**
@@ -92,7 +96,9 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->back()->with('success' , __('general.messages.deleted'));
     }
 
 
