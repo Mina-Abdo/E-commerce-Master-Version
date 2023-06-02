@@ -193,24 +193,34 @@
 
 
     /*==================================================================
-    // [ Cart ]*/
-    // $('.js-show-cart').on('click',function(){
-    //     $('.js-panel-cart').addClass('show-header-cart');
-    // });
+    [ Cart ]*/
+    $('.js-show-cart').on('click',function(){
+        $('.js-panel-cart').addClass('show-header-cart');
+    });
 
-    // $('.js-hide-cart').on('click',function(){
-    //     $('.js-panel-cart').removeClass('show-header-cart');
-    // });
+    $('.js-hide-cart').on('click',function(){
+        $('.js-panel-cart').removeClass('show-header-cart');
+    });
 
-    // /*==================================================================
-    // [ Cart ]*/
-    // $('.js-show-sidebar').on('click',function(){
-    //     $('.js-sidebar').addClass('show-sidebar');
-    // });
+    /*==================================================================
+    [ Cart ]*/
+    $('.js-show-sidebar').on('click',function(){
+        $('.js-sidebar').addClass('show-sidebar');
+    });
 
-    // $('.js-hide-sidebar').on('click',function(){
-    //     $('.js-sidebar').removeClass('show-sidebar');
-    // });
+    $('.js-hide-sidebar').on('click',function(){
+        $('.js-sidebar').removeClass('show-sidebar');
+    });
+
+    /*==================================================================
+    [ whishlist ]*/
+    $('.js-show-wishlist').on('click',function(){
+        $('.js-panel-wishlist').addClass('show-header-wishlist');
+    });
+
+    $('.js-hide-wishlist').on('click',function(){
+        $('.js-panel-wishlist').removeClass('show-header-wishlist');
+    });
 
     /*==================================================================
     [ +/- num product ]*/

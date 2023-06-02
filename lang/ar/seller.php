@@ -102,6 +102,7 @@ return [
         'all' => 'جميع المنتجات',
         'show' => 'عرض تفاصيل منتج',
         'edit' => 'تعديل بيانات منتج',
+        'coupons' => 'الكوبانات'
 
     ],
     'footer' => [
@@ -124,12 +125,14 @@ return [
         'quantity' => 'الكمية',
         'profit_with_quantities' => 'الربح حسب الكمية',
         'status' => 'الحالة',
-        'seller_id' => 'كود البائع',
+        'seller' => ' البائع',
         'category' => 'القسم',
         'operations' => 'العمليات',
         'show' => 'أعرض',
         'edit' => 'تعديل',
         'delete' => 'حذف',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح'
     ],
     'add_product' => [
         'name_en' => 'الآسم بالانجليزية',
@@ -143,7 +146,7 @@ return [
         'category' => 'القسم',
         'description_en' => 'الوصف بالانجليزية',
         'description_ar' => 'الوصف بالعربية',
-        'submit' => ' اضافة منتج',
+        'submit' => ' اضافة',
     ],
     'show_product' => [
         'title' => 'عرض تفاصيل منتج',
@@ -158,6 +161,13 @@ return [
         'profit_with_quantities' => 'الربح حسب الكمية',
         'status' => 'الحالة',
         'category' => 'القسم',
+        'description_en' => 'الوصف بالانجليزية',
+        'description_ar' => 'الوصف بالعربية',
+        'specs' => 'المواصفات',
+        'spec_name' => 'المواصفة',
+        'spec_value' => 'القيمة',
+        'reviews' => 'التقييمات',
+        'no_reviews' => 'لايوجد تقييمات لهذا المنتج حتي الان'
     ],
     'edit_product' => [
         'title' => 'تعديل بيانات منتج',
@@ -174,5 +184,58 @@ return [
         'description_ar' => 'الوصف بالعربية',
         'submit' => ' تعديل منتج',
     ],
+    'all_coupons' => [
+        'title' => 'الكوبانات',
+        'id' => 'id',
+        'max_usage_number_per_user' => 'اقصي استخدام للمستخدم',
+        'discount' => 'الخصم',
+        'max_discount_value' => 'اقصي قيمة خصم',
+        'code' => 'الكود',
+        'max_usage_number' => 'اقصي عدد استخدام',
+        'min_order_value' => 'اقل قيمة للطلب ',
+        'status' => 'الحالة',
+        'start_at' => 'موعد التفعيل',
+        'end_at' => 'موعد الانتهاء',
+        'operations' => 'العمليات',
+        'show' => 'اظهر',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح'
+    ],
+    'add_coupon' => [
+        'max_usage_number_per_user' => 'اقصي استخدام للمستخدم',
+        'discount' => ' (%)الخصم',
+        'max_discount_value' => ' اقصي قيمة خصم (جنيه)',
+        'code' => 'الكود',
+        'max_usage_number' => 'اقصي عدد استخدام',
+        'min_order_value' => ' اقل قيمة للطلب (جنيه)',
+        'status' => 'الحالة',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح',
+        'start_at' => 'موعد التفعيل',
+        'end_at' => 'موعد الانتهاء',
+        'submit' => 'انشاء',
+    ],
+
+    'show_coupon' => [
+        'title' => 'عرض تفاصيل الكوبون',
+        'id' => 'id',
+        'max_usage_number_per_user' => 'اقصي استخدام للمستخدم',
+        'discount' => '(%)الخصم',
+        'max_discount_value' => ' اقصي قيمة خصم (جنيه)',
+        'code' => 'الكود',
+        'max_usage_number' => 'اقصي عدد استخدام',
+        'min_order_value' => ' اقل قيمة للطلب (جنيه)',
+        'status' => 'الحالة',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح',
+        'start_at' => 'موعد التفعيل',
+        'end_at' => 'موعد الانتهاء',
+    ],
+    'edit_coupon'=> [
+        'title' => 'تعديل بيانات كوبون',
+        'submit' => 'تعديل'
+    ]
 
 ];

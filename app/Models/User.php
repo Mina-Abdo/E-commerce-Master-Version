@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\SendEmailNotification;
+use App\Traits\HasEcryptedIds;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Traits\SendResetPasswordNotification;
+use App\Traits\SendEmailNotification;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\SendResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,6 +15,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SendEmailNotification, SendResetPasswordNotification;
+    use HasEcryptedIds;
+
 
     /**
      * The attributes that are mass assignable.
@@ -79,6 +82,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * wishlists relation showing that a user belongs to many wishlists
+     *
+     * @return void
+     */
+    public function wishlists(){
+        return $this->belongsToMany(Product::class , 'wishlists' , 'user_id' , 'product_id')->as('wishlists');
+    }
+
+    /**
      * reviews relation showing that a user has many reviews
      *
      * @return void
@@ -93,6 +105,6 @@ class User extends Authenticatable implements MustVerifyEmail
      * @return void
      */
     public function coupons(){
-        return $this->belongsToMany(Coupon::class)->withPivot('coupon_expired_at' , 'max_no_of_users_per_coupon');
+        return $this->belongsToMany(Coupon::class)->withPivot('max_no_of_usage')->withTimestamps();
     }
 }

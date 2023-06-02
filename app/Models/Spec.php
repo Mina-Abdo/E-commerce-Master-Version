@@ -2,12 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\HasEcryptedIds;
+use App\Traits\EscapeUnicodeJson;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Spec extends Model
 {
     use HasFactory;
+    use HasTranslations;
+    use HasTranslatableSlug;
+    use EscapeUnicodeJson;
+    use HasEcryptedIds;
+
+
 
     protected $fillable = [
         'name',
@@ -20,7 +31,7 @@ class Spec extends Model
      */
     public $translatable = [
         'name',
-        'status'
+        'slug'
     ];
 
     /**
@@ -29,6 +40,17 @@ class Spec extends Model
      * @return void
      */
     public function products(){
-        return $this->belongsToMany(Product::class)->withPivot('value');
+        return $this->belongsToMany(Product::class)->withPivot('value')->withTimestamps()->using(ProductSpec::class);
+    }
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->usingLanguage(false);
     }
 }

@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EscapeUnicodeJson;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Review extends Model
 {
-    use HasFactory , HasTranslations;
+    use HasFactory;
+
 
     /**
      * The attributes that are mass assignable.
@@ -23,14 +25,6 @@ class Review extends Model
         'user_id',
     ];
 
-    /**
-     * The attributes to be translated.
-     *
-     * @var array<int, string>
-     */
-    public $translatable = [
-        'comment',
-    ];
 
     /**
      * product relation showing that a review belongs to one product

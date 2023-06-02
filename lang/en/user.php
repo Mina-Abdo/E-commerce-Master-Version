@@ -81,6 +81,7 @@ return [
             'verification_message' => 'A new verification link has been sent to your email address.',
             'saved' => 'Saved.',
             'save' => 'Save',
+
         ],
         'update_password' => [
             'update_password' => 'Update Password',
@@ -92,6 +93,10 @@ return [
         'delete_account' => [
             'delete_message' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
             'delete' => 'Delete Account',
+            'current_password'=>'Current Password',
+            'new_password'=>'New Password',
+            'confirm_password'=>'Confirm Password',
+            'email_unverified'=>'Your email address is unverified.'
         ],
 
 
@@ -111,6 +116,7 @@ return [
         'login' => 'Log in',
         'logout' => 'Log out',
         'register' => 'Register',
+        'addresses' => 'My Addresses',
 
     ],
     'footer' => [
@@ -125,7 +131,7 @@ return [
         'newsletter' => 'Newsletter',
         'subscribe' => 'Subscribe'
     ],
-    
+
     'index' => [
         'message' => 'Want to become a seller in our website',
         'have_account' => 'Already have a seller account',

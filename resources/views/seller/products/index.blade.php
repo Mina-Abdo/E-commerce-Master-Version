@@ -25,10 +25,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title"> {{__('seller.sidebar.all')}} </h3>
+                                <a href="{{route('sellers.products.create')}}" class="button-general col-3 ml-auto" style="text-decoration:none"> {{__('seller.sidebar.create')}} </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>{{ __('seller.all_products.id') }}</th>
@@ -40,7 +41,6 @@
                                             <th>{{ __('seller.all_products.quantity') }}</th>
                                             <th>{{ __('seller.all_products.profit_with_quantities') }}</th>
                                             <th>{{ __('seller.all_products.status') }}</th>
-                                            <th>{{ __('seller.all_products.seller_id') }}</th>
                                             <th>{{ __('seller.all_products.category') }}</th>
                                             <th>{{ __('seller.all_products.operations') }}</th>
                                         </tr>
@@ -56,13 +56,16 @@
                                             <td>{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$profit * $product->quantity}}</td>
-                                            <td>{{$product->status}}</td>
-                                            <td>{{$product->seller_id}}</td>
-                                            <td>{{$product->category_id}}</td>
+                                            <td @class([
+                                                'p-2',
+                                                'text-success' => $product->status,
+                                                'text-danger' => ! $product->status,
+                                                ])>{{__('seller.all_products.' . printEnum(App\Enums\CategoryEnum::class , $product->status))}}</td>
+                                            <td>{{$product->category->name}}</td>
                                             <td>
-                                                <a href="{{route('sellers.products.show' , $product->id)}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
-                                                <a href="{{route('sellers.products.edit' , $product->id)}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
-                                                <form action="{{route('sellers.products.destroy' , $product->id)}}" method="post" class="d-inline">
+                                                <a href="{{route('sellers.products.show' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
+                                                <a href="{{route('sellers.products.edit' ,  \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <form action="{{route('sellers.products.destroy' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" method="post" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-sm btn-danger  my-2 rounded-pill " type="submit">
@@ -116,22 +119,6 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>
-    @if(session()->has('success'))
-        <script>
-            Swal.fire(
-                'Good Job',
-                '{{session()->get('success')}}',
-                'success'
-            );
-        </script>
-    @elseif (session()->has('error'))
-        <script>
-            Swal.fire(
-                'Failed',
-                '{{session()->get('error')}}',
-                'error'
-            );
-        </script>
-    @endif
+    @include('components.redirect-messages')
 
 @endpush

@@ -21,6 +21,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     require __DIR__.'/users.auth.php';
     require __DIR__.'/sellers.auth.php';
     require __DIR__ . '/admins.auth.php';
+    require __DIR__ . "/admins.php";
     require __DIR__ . "/frontend.php";
     require __DIR__ . "/sellers.php";
+
+
+});
+Route::get('test',function(){
+    phpinfo();
 });

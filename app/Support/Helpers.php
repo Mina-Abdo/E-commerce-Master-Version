@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Coupon;
+use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 if(! function_exists('getProviderFromModel')){
@@ -69,19 +72,60 @@ if(! function_exists('getRouteGuardMap')){
         }
 }
 
-if(! function_exists('product_code')){
+if(! function_exists('productCode')){
     /**
-     * product_code
+     * productCode
      *
      * @param  string $name
      * @return string
      */
-    function product_code(string $name) :?string
+    function productCode(string $name) :?string
     {
         if(empty($name)){
             return null;
         }
         $id = (int)Product::max('id') + 1000;
         return strtoupper($name[0]).$id;
+    }
+}
+
+if(! function_exists('printEnum')){
+    function printEnum($enum , mixed $value) :string
+    {
+        return strtolower($enum::tryFrom($value)?->name);
+    }
+}
+
+
+if (! function_exists('printEnum')) {
+    function printEnum($enum,mixed $value): string
+    {
+        return ucfirst(strtolower(str_replace('_',' ', $enum::tryFrom($value)?->name)));
+    }
+}
+
+if (! function_exists('couponCode')){
+    /**
+     * couponCode
+     *
+     * @return string
+     */
+    function couponCode() :int
+    {
+        $id = (int)Coupon::max('id') + 1000;
+        return $id;
+    }
+}
+
+if (! function_exists('orderCode')){
+    /**
+     * orderCode
+     *
+     * @return string
+     */
+    function orderCode() :int
+    {
+        $id = (int)Order::max('id') . Carbon::now()->format('Ymd');
+        return $id;
     }
 }

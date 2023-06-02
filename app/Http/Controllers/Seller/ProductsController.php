@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Seller;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Enums\CategoryEnum;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\StoreProductRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\ProductSpec;
+use App\Models\Spec;
+use App\Services\ReviewService;
+use App\Services\SpecService;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -19,7 +23,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::where('seller_id', Auth::guard('seller')->id())->get();
+
+        $products = Product::with('category')->where('seller_id', Auth::guard('seller')->id())->get();
         return view('seller.products.index', compact('products'));
     }
 
@@ -30,8 +35,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
-        return view('seller.products.create', compact('categories'));
+        $specs = Spec::all();
+        $categories = Category::select(['id', 'name'])->active()->get();
+        return view('seller.products.create', compact(['categories', 'specs']));
     }
 
     /**
@@ -40,17 +46,26 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request, SpecService $specService)
     {
-        $code = product_code($request->name['en']);
-        $product = Product::create(array_merge($request->validated() ,
-        [
-            'code'=> $code,
-            'seller_id' => Auth::guard('seller')->id(),
-        ]));
-        $product->addMediaFromRequest('image')->toMediaCollection('product');
-        //add specs
-        return redirect()->route('sellers.products.index')->with('success' , __('general.messages.created'));
+        $code = productCode($request->name['en']);
+        $product = Product::create(array_merge(
+            $request->validated(),
+            [
+                'code' => $code,
+                'seller_id' => Auth::guard('seller')->id(),
+            ]
+        ));
+        if ($images = $request->file('images')) {
+            foreach ($images as $image) {
+                $product->addMedia($image)->toMediaCollection('product');
+            }
+        }
+        $specsData = Spec::all();
+        $specIds = SpecService::saveSpecs($request->spec_names, $specsData);
+        $productSpecs = SpecService::matchIds($specIds, $request->spec_values);
+        SpecService::saveProductSpecs($productSpecs, $product);
+        return redirect()->route('sellers.products.index')->with('success', __('general.messages.created'));
     }
 
     /**
@@ -59,9 +74,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product, string $slug = null)
     {
-        return view('seller.products.show', compact(['product' , 'category']) );
+        $product->load('category:id,name', 'reviews.user:id,name', 'specs');
+        return view('seller.products.show', compact(['product']));
     }
 
     /**
@@ -72,8 +88,8 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
-        return view('seller.products.edit' , compact(['product' , 'categories']));
+        $categories = Category::select(['id', 'name'])->active()->get();
+        return view('seller.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -83,9 +99,17 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        if ($request->has('image')) {
+            $media = $product->getFirstMedia('product');
+            if($media){
+                $media->delete();
+            }
+            $product->addMediaFromRequest('image')->toMediaCollection('product');
+        }
+        $product->update($request->validated());
+        return redirect()->route('sellers.products.index')->with('success', __('general.messages.updated'));
     }
 
     /**
@@ -94,12 +118,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
+        $product->specs()->detach();
         $product->delete();
-        return redirect()->back()->with('success' , __('general.messages.deleted'));
+        return redirect()->back()->with('success', __('general.messages.deleted'));
     }
-
-
 }

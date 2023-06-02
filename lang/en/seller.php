@@ -103,6 +103,7 @@ return [
         'all' => 'All',
         'show' => 'Show product details',
         'edit' => 'Edit product details',
+        'coupons' => 'Coupons'
 
     ],
     'footer' => [
@@ -125,12 +126,14 @@ return [
         'quantity' => 'Quantity',
         'profit_with_quantities' => 'Profit With Quantities',
         'status' => 'Status',
-        'seller_id' => 'Seller id',
+        'seller' => 'Seller',
         'category' => 'Category',
         'operations' => 'Operations',
         'show' => 'Show',
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'active' => 'Active',
+        'not_active' => 'Not Active'
     ],
     'add_product' => [
         'name_en' => 'Name (EN)',
@@ -144,7 +147,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'اضافة',
+        'submit' => 'Create',
     ],
     'show_product' => [
         'title' => 'Show product details',
@@ -159,6 +162,14 @@ return [
         'profit_with_quantities' => 'Profit With Quantities',
         'status' => 'Status',
         'category' => 'Category',
+        'description_en' => 'Description (EN)',
+        'description_ar' => 'Description (AR)',
+        'specs' => 'Specifications',
+        'spec_name' => 'Spec Name',
+        'spec_value' => 'Spec Value',
+        'reviews' => 'Reviews',
+        'no_reviews' => 'No reviews for this product yet',
+
     ],
     'edit_product' => [
         'title' => 'Edit product details',
@@ -173,7 +184,59 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'ُEdit',
+        'submit' => 'Update',
     ],
+    'all_coupons' => [
+        'title' => 'Coupons',
+        'id' => 'id',
+        'max_usage_number_per_user' => 'Max usage/ user',
+        'discount' => 'Discount',
+        'max_discount_value' => 'Max discount value',
+        'code' => 'Code',
+        'max_usage_number' => 'Max usage',
+        'min_order_value' => 'Min order value',
+        'status' => 'Status',
+        'start_at' => 'Start at',
+        'end_at' => 'End at',
+        'operations' => 'Operations',
+        'show' => 'Show',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'active' => 'Active',
+        'not_active' => 'Not Active'
+    ],
+    'add_coupon' => [
+        'max_usage_number_per_user' => 'Max usage number per user',
+        'discount' => 'Discount (%)',
+        'max_discount_value' => 'Max discount value (EGP)',
+        'code' => 'Code',
+        'max_usage_number' => 'Max usage number',
+        'min_order_value' => 'Min order value (EGP)',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'start_at' => 'Start at',
+        'end_at' => 'End at',
+        'submit' => 'Create',
+    ],
+    'show_coupon' => [
+        'title' => 'Show coupon details',
+        'id' => 'id',
+        'max_usage_number_per_user' => 'Max usage number per user',
+        'discount' => 'Discount (%)',
+        'max_discount_value' => 'Max discount value ',
+        'code' => 'Code',
+        'max_usage_number' => 'Max usage number',
+        'min_order_value' => 'Min order value ',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'start_at' => 'Start at',
+        'end_at' => 'End at',
+    ],
+    'edit_coupon'=> [
+        'title' => 'Edit Coupon details',
+        'submit' => 'Update'
+    ]
 
 ];
