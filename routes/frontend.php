@@ -33,12 +33,19 @@ Route::get('/cart', [CartController::class, 'cart'])->name('cart')->middleware('
 
 Route::get('/{product}', [ProductDetailsController::class, 'detail'])->name('product-details');
 
-Route::post('/cart/recipent', [OrderController::class, 'recipent'])->name('recipent');
+Route::post('/cart/recipent', [OrderController::class, 'recipent'])->name('recipent')->middleware('auth:web');
 
-Route::get('/cart/recipent', [OrderController::class, 'display'])->name('displayRecipent');
+Route::get('/cart/recipent', [OrderController::class, 'display'])->name('displayRecipent')->middleware('auth:web');
 
-Route::get('/cart/placeOrder', [OrderController::class, 'placeorder'])->name('placeOrder');
+Route::post('/cart/placeOrder', [OrderController::class, 'placeorder'])->name('placeOrder')->middleware('auth:web');
 
-Route::get('/cart/orderPlaced', [OrderController::class, 'orderPlaced'])->name('orderPlaced');
+Route::get('/cart/orderPlaced', [OrderController::class, 'orderPlaced'])->name('orderPlaced')->middleware('auth:web');
 
-
+Route::name('users.')->group(function() {
+    Route::middleware('auth:web')->prefix('orders')->controller(OrderController::class)->name('orders.')->group(function() {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/show/{user}/{order}', 'show')->name('show');
+        Route::get('/edit/{user}/{order}', 'edit')->name('edit');
+        Route::put('/update/{order}', 'update')->name('update');
+    });
+});
