@@ -25,6 +25,7 @@ class SpecService
             });
             $specIds[] = $spec->id;
         }
+
         return $specIds;
     }
 

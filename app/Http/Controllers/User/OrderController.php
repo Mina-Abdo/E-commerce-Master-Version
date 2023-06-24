@@ -196,6 +196,9 @@ class OrderController extends Controller
                     'discount' => $productDiscount = ($discountPercent / 100) * $product->sale_price,
                     'price_after_discount' => ($product->sale_price - $productDiscount),
                 ]);
+                $product->update([
+                    'quantity' => $product->quantity - $product->carts->quantity
+                ]);
             }
             $user->carts()->detach();
 

@@ -13,4 +13,6 @@ interface ProductEntityInterface
     public function setName(string $name) :void;
     public function getCode(): string;
     public function setCode(string $code) :void;
+    public function getSellerName(): string;
+    public function setSellerName(string $name) :void;
 }

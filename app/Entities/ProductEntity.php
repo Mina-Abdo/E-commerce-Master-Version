@@ -4,6 +4,7 @@ namespace App\Entities;
 class ProductEntity implements ProductEntityInterface
 {
     private $price, $quantity, $name, $code, $stock;
+    private string $sellerName;
 
     /**
      * Get the value of price
@@ -93,5 +94,23 @@ class ProductEntity implements ProductEntityInterface
     public function setStock(int $stock) :void
     {
         $this->stock = $stock;
+    }
+
+    /**
+     * Get the value of sellerName
+     */
+    public function getSellerName() :string
+    {
+        return $this->sellerName;
+    }
+
+    /**
+     * Set the value of sellerName
+     *
+     * @return  self
+     */
+    public function setSellerName(string $sellerName) :void
+    {
+        $this->sellerName = $sellerName;
     }
 }

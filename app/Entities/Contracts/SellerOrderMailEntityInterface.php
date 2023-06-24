@@ -47,18 +47,63 @@ interface SellerOrderMailEntityInterface extends OrderMailEntityInterface
     public function setWebsiteAddress(string $address) :void;
 
     /**
-     * getSellers
+     * getSellerName
      *
      * @return string
      */
-    public function getSeller() :OrderSellerEntity;
+    public function getSellerName() :string;
 
     /**
-     * setSeller
+     * setSellerName
      *
-     * @param  self $seller
+     * @param  self $sellerName
      * @return void
      */
-    public function setSeller(OrderSellerEntity $seller) :void;
+    public function setSellerName(string $seller) :void;
+
+    /**
+     * getSellerShopName
+     *
+     * @return string
+     */
+    public function getSellerShopName() :string;
+
+    /**
+     * setSellerShopName
+     *
+     * @param  self $sellerShopName
+     * @return void
+     */
+    public function setSellerShopName(string $shopName) :void;
+
+    /**
+     * getSellerEmail
+     *
+     * @return string
+     */
+    public function getSellerEmail() :string;
+
+    /**
+     * setSellerEmail
+     *
+     * @param  self $sellerEmail
+     * @return void
+     */
+    public function setSellerEmail(string $email) :void;
+
+    /**
+     * getSellerPhone
+     *
+     * @return string
+     */
+    public function getSellerPhone() :string;
+
+    /**
+     * setSellerPhone
+     *
+     * @param  self $sellerPhone
+     * @return void
+     */
+    public function setSellerPhone(string $phone) :void;
 
 }

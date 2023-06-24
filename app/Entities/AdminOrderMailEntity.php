@@ -102,7 +102,7 @@ class AdminOrderMailEntity implements AdminOrderMailEntityInterface
          * @param  mixed $products
          * @return void
          */
-    public function setProducts(ProductEntityInterface $product): void
+    public function addProduct(ProductEntityInterface $product): void
     {
         $this->products[] = $product;
     }

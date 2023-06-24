@@ -73,7 +73,7 @@ class AddressesController extends Controller
     public function update(UpdateAddressRequest $request, Address $address)
     {
         $address->update($request->validated());
-        return redirect()->back(2)->with('success', __('general.messages.updated'));
+        return redirect()->back()->with('success', __('general.messages.updated'));
     }
 
     /**

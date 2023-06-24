@@ -16,11 +16,13 @@ class UserOrderMailEntity implements UserOrderMailEntityInterface
     private string $orderCode;
     private string $orderCreationDate;
     private string $orderDeliveryDate;
-    private array $products;
+    private array $products=[];
     private float $total;
     private float $subTotal;
     private float $discount;
     private float $shipping;
+    private string $paymentMethod;
+
 
     /**
      * getWebsiteName
@@ -150,10 +152,10 @@ class UserOrderMailEntity implements UserOrderMailEntityInterface
     /**
          * setProducts
          *
-         * @param  mixed $products
+         * @param  ProductEntityInterface $product
          * @return void
          */
-    public function setProducts(ProductEntityInterface $product): void
+    public function addProduct(ProductEntityInterface $product): void
     {
         $this->products[] = $product;
     }
@@ -309,5 +311,24 @@ class UserOrderMailEntity implements UserOrderMailEntityInterface
     public function setOrderDeliveryDate($orderDeliveryDate) :void
     {
         $this->orderDeliveryDate = $orderDeliveryDate;
+    }
+
+    /**
+     * Get the value of paymentMethod
+     */
+    public function getPaymentMethod() :string
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * Set the value of paymentMethod
+     *
+     * @return  self
+     */
+    public function setPaymentMethod($paymentMethod) :void
+    {
+        $this->paymentMethod = $paymentMethod;
+
     }
 }

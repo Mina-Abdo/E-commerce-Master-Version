@@ -17,13 +17,19 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
     private string $orderCode;
     private string $orderCreationDate;
     private string $orderDeliveryDate;
-    private array $products;
+    private array $products=[] ;
     private float $total;
     private float $subTotal;
     private float $discount;
     private float $shipping;
     private string $paymentMethod;
-    private OrderSellerEntity $seller;
+    private string $sellerName;
+    private string $sellerShopName;
+    private string $sellerEmail;
+    private string $sellerPhone;
+
+
+
 
 
     /**
@@ -157,7 +163,7 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
          * @param  mixed $products
          * @return void
          */
-    public function setProducts(ProductEntityInterface $product): void
+    public function addProduct(ProductEntityInterface $product): void
     {
         $this->products[] = $product;
     }
@@ -319,9 +325,9 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
     /**
      * Get the value of sellers
      */
-    public function getSeller() :OrderSellerEntity
+    public function getSellerName() :string
     {
-        return $this->seller;
+        return $this->sellerName;
     }
 
     /**
@@ -329,9 +335,9 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
      *
      * @return  self
      */
-    public function setSeller(OrderSellerEntity $seller) :void
+    public function setSellerName(string $sellerName) :void
     {
-        $this->seller = $seller;
+        $this->sellerName = $sellerName;
     }
 
     /**
@@ -351,5 +357,59 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
     {
         $this->paymentMethod = $paymentMethod;
 
+    }
+
+    /**
+     * Get the value of sellerShopName
+     */
+    public function getSellerShopName() :string
+    {
+        return $this->sellerShopName;
+    }
+
+    /**
+     * Set the value of sellerShopName
+     *
+     * @return  self
+     */
+    public function setSellerShopName(string $sellerShopName) :void
+    {
+        $this->sellerShopName = $sellerShopName;
+    }
+
+    /**
+     * Get the value of sellerEmail
+     */
+    public function getSellerEmail() :string
+    {
+        return $this->sellerEmail;
+    }
+
+    /**
+     * Set the value of sellerEmail
+     *
+     * @return  self
+     */
+    public function setSellerEmail(string $sellerEmail) :void
+    {
+        $this->sellerEmail = $sellerEmail;
+    }
+
+    /**
+     * Get the value of sellerPhone
+     */
+    public function getSellerPhone() :string
+    {
+        return $this->sellerPhone;
+    }
+
+    /**
+     * Set the value of sellerPhone
+     *
+     * @return  self
+     */
+    public function setSellerPhone(string $sellerPhone) :void
+    {
+        $this->sellerPhone = $sellerPhone;
     }
 }

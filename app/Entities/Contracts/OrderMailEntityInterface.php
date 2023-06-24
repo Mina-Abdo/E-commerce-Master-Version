@@ -54,10 +54,10 @@ interface OrderMailEntityInterface
     /**
      * setProducts
      *
-     * @param  mixed $products
+     * @param  mixed $product
      * @return void
      */
-    public function setProducts(ProductEntityInterface $products) :void;
+    public function addProduct(ProductEntityInterface $product) :void;
 
     /**
      * getTotal
