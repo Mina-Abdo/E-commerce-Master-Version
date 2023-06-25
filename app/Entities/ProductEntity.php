@@ -5,6 +5,8 @@ class ProductEntity implements ProductEntityInterface
 {
     private $price, $quantity, $name, $code, $stock;
     private string $sellerName;
+    private string $sellerEmail;
+
 
     /**
      * Get the value of price
@@ -112,5 +114,23 @@ class ProductEntity implements ProductEntityInterface
     public function setSellerName(string $sellerName) :void
     {
         $this->sellerName = $sellerName;
+    }
+
+    /**
+     * Get the value of sellerEmail
+     */
+    public function getSellerEmail() :string
+    {
+        return $this->sellerEmail;
+    }
+
+    /**
+     * Set the value of sellerEmail
+     *
+     * @return  self
+     */
+    public function setSellerEmail(string $sellerEmail) :void
+    {
+        $this->sellerEmail = $sellerEmail;
     }
 }

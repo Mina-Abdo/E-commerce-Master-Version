@@ -187,6 +187,7 @@ class OrderController extends Controller
                 'coupon_id' => $coupon_id
             ]);
             $prepareMailData = new PreprareOrderMailDataService($user, $admin, $order, $products, $address, $websiteSetting, $coupon, $shippingValue, $discountPercent, $subTotal);
+            // dd($prepareMailData->getAdminEntity(), $prepareMailData->getSellerEntity(), $prepareMailData->getUserEntity());
             OrderCreatedEvent::dispatch($prepareMailData->getUserEntity(), $prepareMailData->getAdminEntity(), $prepareMailData->getSellerEntity());
             foreach ($user->carts as $product) {
                 $product->orders()->attach($product->id, [

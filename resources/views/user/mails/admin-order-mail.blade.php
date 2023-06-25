@@ -127,13 +127,13 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="" alt="Company logo" style="width: 100%; max-width: 300px" />
+                                <img src="{{asset('frontend-assets/images/icons/logo-01.png')}}" alt="Company logo" style="width: 100%; max-width: 300px" />
                             </td>
 
                             <td>
-                                Order #: 123<br />
-                                Created: January 1, 2015<br />
-                                Due: February 1, 2015
+                                Order #: {{ $adminMailData->getOrderCode() }}<br />
+                                Created: {{ $adminMailData->getOrderCreationDate()}}<br />
+                                Due: {{ $adminMailData->getOrderDeliveryDate()}}
                             </td>
                         </tr>
                     </table>
@@ -146,28 +146,16 @@
                         <tr>
                             <td>
                                 <p>
-                                    seller  shop name.
-                                </p>
-                                <p>
-                                    seller phone
-                                </p>
-                                <p>
-                                    seller mail
-                                </p>
-                            </td>
-
-                            <td>
-                                <p>
                                     Billed to:
                                 </p>
                                 <p>
-                                    user name
+                                    {{ $adminMailData->getUserName() }}
+                                </p>
+                                <p style="font-size: 2vw">
+                                    {{ $adminMailData->getUserAddress() }}
                                 </p>
                                 <p>
-                                    user address
-                                </p>
-                                <p>
-                                    user email
+                                    {{ $adminMailData->getUserEmail() }}
                                 </p>
                             </td>
                         </tr>
@@ -187,6 +175,7 @@
                     <th style="text-align: center;"> Code </th>
                     <th style="text-align: center;"> Product name </th>
                     <th style="text-align: center;"> Seller name </th>
+                    <th style="text-align: center;"> Shop Name </th>
                     <th style="text-align: center;"> quantity </th>
                     <th style="text-align: center;"> price </th>
                     <th style="text-align: center;"> total </th>
@@ -194,57 +183,68 @@
             </thead>
 
             <tbody>
-                <tr class="item">
-                    <td style="text-align: center;"> Code </td>
-                    <td style="text-align: center;">
-                        <p>product name</p>
-                    </td>
-                    <td style="text-align: center;">
-                        Seller name
-                    </td>
-                    <td style="text-align: center;">
-                        <p>
-                            quantity
-                        </p>
-                    </td>
-                    <td style="text-align: center;">
-                        sale price
-                    </td>
-                    <td style="text-align: center;">
-                        <p>
-                            product subtotal
-                        </p>
-                    </td>
-                </tr>
+                @foreach ($adminMailData->getSellers() as $seller)
+                    @foreach ($seller->getProducts() as $product)
+                        <tr class="item">
+                            <td style="text-align: center;"> {{ $product->getCode() }} </td>
+                            <td style="text-align: center;">
+                                <p>{{ $product->getName() }}</p>
+                            </td>
+                            <td style="text-align: center;">
+                                {{ $product->getSellerName() }}
+                            </td>
+                            <td style="text-align: center;">
+                                {{ $seller->getShopName() }}
+                            </td>
+                            <td style="text-align: center;">
+                                <p>
+                                    {{ $product->getQuantity() }}
+                                </p>
+                            </td>
+                            <td style="text-align: center;">
+                                {{ $product->getPrice() }}
+                            </td>
+                            <td style="text-align: center;">
+                                <p>
+                                    {{ $product->getQuantity() * $product->getPrice() }}
+                                </p>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endforeach
                 <tr class="total">
                     <td colspan="5"> </td>
                     <th>Sub Total</th>
-                    <td style="text-align: center;">subtotal</td>
+                    <td style="text-align: center;">{{ $adminMailData->getSubTotal() }}</td>
                 </tr class="total">
                 <!-- end tr -->
-                <tr class="total">
-                    <td colspan="5"> </td>
-                    <th>Coupon applied :</th>
-                    <td style="text-align: center;">coupon code</td>
-                </tr>
+                @if ($adminMailData->getCoupon())
+                    <tr class="total">
+                        <td colspan="5"> </td>
+                        <th>Coupon applied :</th>
+                        <td style="text-align: center;">{{$adminMailData->getCoupon()->code}}</td>
+                    </tr>
+                @endif
                 <!-- end tr -->
-                <tr class="total">
-                    <td colspan="5"> </td>
-                    <th>Discount :</th>
-                    <td style="text-align: center;">- discount value</td>
-                </tr>
+                @if ($adminMailData->getCoupon())
+                    <tr class="total">
+                        <td colspan="4"> </td>
+                        <th>Discount :</th>
+                        <td style="text-align: center;">- {{ $userMailData->getSubtotal() * $userMailData->getDiscount() }}</td>
+                    </tr>
+                @endif
 
                 <!-- end tr -->
                 <tr class="total">
                     <td colspan="5"> </td>
                     <th>Shipping Charge :</th>
-                    <td style="text-align: center;">shipping value </td>
+                    <td style="text-align: center;">{{$adminMailData->getShipping()}} </td>
                 </tr>
                 <!-- end tr -->
                 <tr class="total">
                     <td colspan="5"> </td>
                     <th>Total</th>
-                    <td style="text-align: center;">total </td>
+                    <td style="text-align: center;">{{$adminMailData->getTotal()}} </td>
                 </tr>
             </tbody>
         </table>

@@ -111,11 +111,15 @@ class PreprareOrderMailDataService
             $productEntity->setStock($cartProduct->quantity - $cartProduct->carts->quantity);
             $productEntity->setCode($cartProduct->code);
             $productEntity->setSellerName($cartProduct->seller->name);
+            $productEntity->setSellerEmail($cartProduct->seller->email);
+
 
 
             // private array $products;
             $adminEntity->addProduct($productEntity);
             $this->userEntity->addProduct($productEntity);
+            $sellerEntity->addProduct($productEntity);
+
 
             // admin
             // private string $sellerName;
@@ -133,30 +137,30 @@ class PreprareOrderMailDataService
             $adminEntity->setSellerPhone($cartProduct->seller->phone);
             $sellerEntity->setSellerPhone($cartProduct->seller->phone);
 
-            // private seller product
-            if(!$sellerEntity->getProducts()) // check if seller produts is empty
-            {
-                $sellerEntity->addProduct($productEntity); // add product when products are empty
-            }else
-            {
-                foreach($sellerEntity->getProducts() as $sellerProduct) //loop over products in sellerEntity
-                {
-                    if($productEntity->getCode() != $sellerProduct->getCode()) // check if the product already exists
-                    {
-                        $sellerEntity->addProduct($productEntity);
+            // unique admin mail sellers
+
+            if (!$this->adminEntity->getSellers()) { // check that adminEntity has no sellers
+                $sellerEntityForAdminMail = $this->prepareSeller($cartProduct->seller->name,
+                $cartProduct->seller->shop_name,
+                $cartProduct->seller->email,
+                $cartProduct->seller->phone,
+                $productEntity); // new seller entity for admin mail to fill its data
+                $this->adminEntity->addSeller($sellerEntityForAdminMail);
+            } else {
+                foreach ($adminEntity->getSellers() as $adminSeller) {
+                    if ($cartProduct->seller->email != $adminSeller->getSellerEmail()) { // check if the seller already exsists
+                        $sellerEntityForAdminMail = $this->prepareSeller($cartProduct->seller->name,
+                        $cartProduct->seller->shop_name,
+                        $cartProduct->seller->email,
+                        $cartProduct->seller->phone,
+                        $productEntity); // new seller entity for admin mail to fill its data
+                        $this->adminEntity->addSeller($sellerEntityForAdminMail);
+                    } else {
+                        $adminSeller->addProduct($productEntity); // new seller entity for admin mail to fill its data
                     }
                 }
             }
-
-            // unique sellers
-            $sellerEntityForAdminMail = new OrderSellerEntity(); // new seller entity for admin mail to fill its data
-            $sellerEntityForAdminMail->setSellerName($cartProduct->seller->name);
-            $sellerEntityForAdminMail->setSellerShopName($cartProduct->seller->shop_name);
-            $sellerEntityForAdminMail->setSellerEmail($cartProduct->seller->email);
-            $sellerEntityForAdminMail->setSellerPhone($cartProduct->seller->phone);
-            $sellerEntityForAdminMail->addProduct($productEntity);
-            $this->adminEntity->addSeller($sellerEntityForAdminMail);
-            $this->sellerEntity= $sellerEntity; // assign the modified clone to the original seller entity to include added data
+            $this->sellerEntity = $sellerEntity; // assign the modified clone to the original seller entity to include added data
         }
         // private string $adminEmail;
         $this->adminEntity->setAdminEmail($this->admin->email);
@@ -172,6 +176,16 @@ class PreprareOrderMailDataService
         $this->sellerEntity->setWebsiteEmail($this->webisteSetting->email);
     }
 
+    private function prepareSeller($sellerName, $shopName, $sellerEmail, $sellerPhone, $sellerProduct)
+    {
+        $sellerEntityForAdminMail = new OrderSellerEntity(); // new seller entity for admin mail to fill its data
+        $sellerEntityForAdminMail->setSellerName($sellerName);
+        $sellerEntityForAdminMail->setSellerShopName($shopName);
+        $sellerEntityForAdminMail->setSellerEmail($sellerEmail);
+        $sellerEntityForAdminMail->setSellerPhone($sellerPhone);
+        $sellerEntityForAdminMail->addProduct($sellerProduct);
+        return $sellerEntityForAdminMail;
+    }
 
     /**
      * Get the value of userEntity
