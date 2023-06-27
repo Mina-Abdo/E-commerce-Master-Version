@@ -79,4 +79,57 @@ interface OrderSellerInterface
      * @return array
      */
     public function getProducts() :array;
+
+    /**
+     * getTotal
+     *
+     * @return float
+     */
+    public function getTotal() :float;
+    /**
+     * setTotal
+     *
+     * @param  mixed $total
+     * @return void
+     */
+    public function setTotal(float $total) :void;
+    /**
+     * getSubTotal
+     *
+     * @return float
+     */
+    public function getSubTotal() :float;
+    /**
+     * setSubTotal
+     *
+     * @param  mixed $subTotal
+     * @return void
+     */
+    public function setSubTotal(float $subTotal) :void;
+    /**
+     * getDiscount
+     *
+     * @return float
+     */
+    public function getDiscount() :float;
+    /**
+     * setDiscount
+     *
+     * @param  mixed $discount
+     * @return void
+     */
+    public function setDiscount(float $discount) :void;
+    /**
+     * getShipping
+     *
+     * @return float
+     */
+    public function getShipping() :float;
+    /**
+     * setShipping
+     *
+     * @param  mixed $shipping
+     * @return void
+     */
+    public function setShipping(float $shipping) :void;
 }

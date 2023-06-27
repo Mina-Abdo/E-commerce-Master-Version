@@ -23,13 +23,7 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
     private float $discount;
     private float $shipping;
     private string $paymentMethod;
-    private string $sellerName;
-    private string $sellerShopName;
-    private string $sellerEmail;
-    private string $sellerPhone;
-
-
-
+    private array $sellers=[] ;
 
 
     /**
@@ -323,24 +317,6 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
     }
 
     /**
-     * Get the value of sellers
-     */
-    public function getSellerName() :string
-    {
-        return $this->sellerName;
-    }
-
-    /**
-     * Set the value of sellers
-     *
-     * @return  self
-     */
-    public function setSellerName(string $sellerName) :void
-    {
-        $this->sellerName = $sellerName;
-    }
-
-    /**
      * Get the value of paymentMethod
      */
     public function getPaymentMethod() :string
@@ -360,56 +336,23 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
     }
 
     /**
-     * Get the value of sellerShopName
-     */
-    public function getSellerShopName() :string
-    {
-        return $this->sellerShopName;
-    }
-
-    /**
-     * Set the value of sellerShopName
+     * addSeller
      *
-     * @return  self
+     * @param  mixed $seller
+     * @return void
      */
-    public function setSellerShopName(string $sellerShopName) :void
+    public function addSeller(OrderSellerEntity $seller):void
     {
-        $this->sellerShopName = $sellerShopName;
+        $this->sellers[] = $seller;
     }
 
     /**
-     * Get the value of sellerEmail
-     */
-    public function getSellerEmail() :string
-    {
-        return $this->sellerEmail;
-    }
-
-    /**
-     * Set the value of sellerEmail
+     * getSellers
      *
-     * @return  self
+     * @return array
      */
-    public function setSellerEmail(string $sellerEmail) :void
+    public function getSellers() :array
     {
-        $this->sellerEmail = $sellerEmail;
-    }
-
-    /**
-     * Get the value of sellerPhone
-     */
-    public function getSellerPhone() :string
-    {
-        return $this->sellerPhone;
-    }
-
-    /**
-     * Set the value of sellerPhone
-     *
-     * @return  self
-     */
-    public function setSellerPhone(string $sellerPhone) :void
-    {
-        $this->sellerPhone = $sellerPhone;
+        return $this->sellers;
     }
 }

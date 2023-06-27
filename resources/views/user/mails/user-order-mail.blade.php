@@ -163,7 +163,7 @@
                                 <p>
                                     {{ $userMailData->getUserName() }}
                                 </p>
-                                <p style="font-size: 2vw">
+                                <p style="font-size: 1.3rem">
                                     {{ $userMailData->getUserAddress() }}
                                 </p>
                                 <p>
@@ -197,7 +197,7 @@
                     <tr class="item">
                         <td style="text-align: center;"> {{ $product->getCode() }} </td>
                         <td style="text-align: center;">
-                            <p>{{ $product->getname() }}</p>
+                            <p>{{ $product->getName() }}</p>
                         </td>
                         <td style="text-align: center;">
                             <p>
@@ -216,14 +216,14 @@
                 @endforeach
 
                 <tr class="total">
-                    <td colspan="4"> </td>
+                    <td colspan="3"> </td>
                     <th>Sub Total</th>
                     <td style="text-align: center;">{{ $userMailData->getSubTotal() }} EGP</td>
                 </tr class="total">
                 <!-- end tr -->
                 @if ($userMailData->getCoupon())
                     <tr class="total">
-                        <td colspan="4"> </td>
+                        <td colspan="3"> </td>
                         <th>Coupon applied :</th>
                         <td style="text-align: center;">{{ $userMailData->getCoupon()->code }}</td>
                     </tr>
@@ -231,7 +231,7 @@
                 <!-- end tr -->
                 @if ($userMailData->getCoupon())
                     <tr class="total">
-                        <td colspan="4"> </td>
+                        <td colspan="3"> </td>
                         <th>Discount :</th>
                         <td style="text-align: center;">- {{ $userMailData->getSubtotal() * $userMailData->getDiscount() }}</td>
                     </tr>
@@ -239,13 +239,13 @@
 
                 <!-- end tr -->
                 <tr class="total">
-                    <td colspan="4"> </td>
+                    <td colspan="3"> </td>
                     <th>Shipping Charge :</th>
                     <td style="text-align: center;">{{ $userMailData->getShipping() }} </td>
                 </tr>
                 <!-- end tr -->
                 <tr class="total">
-                    <td colspan="4"> </td>
+                    <td colspan="3"> </td>
                     <th>Total</th>
                     <td style="text-align: center;">{{ $userMailData->getTotal() }} </td>
                 </tr>

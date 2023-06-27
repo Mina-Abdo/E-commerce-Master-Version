@@ -1,9 +1,15 @@
 <?php
 namespace App\Entities;
 
+use Ramsey\Uuid\Type\Integer;
+
 class ProductEntity implements ProductEntityInterface
 {
-    private $price, $quantity, $name, $code, $stock;
+    private float $price;
+    private int $quantity;
+    private string $name;
+    private string $code;
+    private int $stock;
     private string $sellerName;
     private string $sellerEmail;
 

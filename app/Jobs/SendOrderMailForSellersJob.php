@@ -34,8 +34,8 @@ class SendOrderMailForSellersJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->sellerMailData->getProducts() as $product) {
-            Mail::to($product->getSellerEmail())->send(new SendOrderMailForSellers($this->sellerMailData));
+        foreach ($this->sellerMailData->getSellers() as $index => $seller) {
+            Mail::to($seller->getSellerEmail())->send(new SendOrderMailForSellers($this->sellerMailData, $seller));
         }
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Entities\Contracts\SellerOrderMailEntityInterface;
+use App\Entities\OrderSellerEntity;
 
 class SendOrderMailForSellers extends Mailable
 {
@@ -19,7 +20,7 @@ class SendOrderMailForSellers extends Mailable
      *
      * @return void
      */
-    public function __construct(public SellerOrderMailEntityInterface $sellerMailData)
+    public function __construct(public SellerOrderMailEntityInterface $sellerMailData, public OrderSellerEntity $seller)
     {
         //
     }

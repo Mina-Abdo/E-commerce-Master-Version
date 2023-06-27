@@ -83,7 +83,7 @@ class PreprareOrderMailDataService
         $this->adminEntity->setOrderDeliveryDate($this->order->delivery_date);
         // private float $subTotal;
         $this->userEntity->setSubTotal($this->subTotal);
-        $this->sellerEntity->setSubTotal($this->subTotal);
+        // $this->sellerEntity->setSubTotal($this->subTotal);
         $this->adminEntity->setSubTotal($this->subTotal);
         // private float $discount;
         $this->userEntity->setDiscount($this->discount);
@@ -96,7 +96,7 @@ class PreprareOrderMailDataService
         // private float $total;
         $total = $this->subTotal + $this->shipping - (($this->discount / 100) * $this->subTotal);
         $this->userEntity->setTotal($total);
-        $this->sellerEntity->setTotal($total);
+        // $this->sellerEntity->setTotal($total);
         $this->adminEntity->setTotal($total);
 
 
@@ -113,54 +113,87 @@ class PreprareOrderMailDataService
             $productEntity->setSellerName($cartProduct->seller->name);
             $productEntity->setSellerEmail($cartProduct->seller->email);
 
-
-
             // private array $products;
             $adminEntity->addProduct($productEntity);
             $this->userEntity->addProduct($productEntity);
             $sellerEntity->addProduct($productEntity);
 
-
             // admin
             // private string $sellerName;
             $adminEntity->setSellerName($cartProduct->seller->name);
-            $sellerEntity->setSellerName($cartProduct->seller->name);
             // private string $sellerShopName;
             $adminEntity->setSellerShopName($cartProduct->seller->shop_name);
-            $sellerEntity->setSellerShopName($cartProduct->seller->shop_name);
 
             // private string $sellerEmail;
             $adminEntity->setSellerEmail($cartProduct->seller->email);
-            $sellerEntity->setSellerEmail($cartProduct->seller->email);
 
             // private string $sellerPhone;
             $adminEntity->setSellerPhone($cartProduct->seller->phone);
-            $sellerEntity->setSellerPhone($cartProduct->seller->phone);
 
             // unique admin mail sellers
-
             if (!$this->adminEntity->getSellers()) { // check that adminEntity has no sellers
-                $sellerEntityForAdminMail = $this->prepareSeller($cartProduct->seller->name,
-                $cartProduct->seller->shop_name,
-                $cartProduct->seller->email,
-                $cartProduct->seller->phone,
-                $productEntity); // new seller entity for admin mail to fill its data
+                $sellerEntityForAdminMail = $this->prepareSeller(
+                    $cartProduct->seller->name,
+                    $cartProduct->seller->shop_name,
+                    $cartProduct->seller->email,
+                    $cartProduct->seller->phone,
+                    $productEntity
+                ); // new seller entity for admin mail to fill its data
                 $this->adminEntity->addSeller($sellerEntityForAdminMail);
             } else {
                 foreach ($adminEntity->getSellers() as $adminSeller) {
                     if ($cartProduct->seller->email != $adminSeller->getSellerEmail()) { // check if the seller already exsists
-                        $sellerEntityForAdminMail = $this->prepareSeller($cartProduct->seller->name,
-                        $cartProduct->seller->shop_name,
-                        $cartProduct->seller->email,
-                        $cartProduct->seller->phone,
-                        $productEntity); // new seller entity for admin mail to fill its data
+                        $sellerEntityForAdminMail = $this->prepareSeller(
+                            $cartProduct->seller->name,
+                            $cartProduct->seller->shop_name,
+                            $cartProduct->seller->email,
+                            $cartProduct->seller->phone,
+                            $productEntity
+                        ); // new seller entity for admin mail to fill its data
                         $this->adminEntity->addSeller($sellerEntityForAdminMail);
                     } else {
                         $adminSeller->addProduct($productEntity); // new seller entity for admin mail to fill its data
                     }
                 }
             }
+
+            // prepare each seller for the mail entity
+            if (!$sellerEntity->getSellers()) { // check that adminEntity has no sellers
+                $sellerEntityForAdminMail = $this->prepareSeller(
+                    $cartProduct->seller->name,
+                    $cartProduct->seller->shop_name,
+                    $cartProduct->seller->email,
+                    $cartProduct->seller->phone,
+                    $productEntity
+                ); // new seller entity for admin mail to fill its data
+                $sellerEntity->addSeller($sellerEntityForAdminMail);
+            } else {
+                foreach ($sellerEntity->getSellers() as $seller) {
+                    if ($cartProduct->seller->email != $seller->getSellerEmail()) { // check if the seller already exsists
+                        $sellerEntityForAdminMail = $this->prepareSeller(
+                            $cartProduct->seller->name,
+                            $cartProduct->seller->shop_name,
+                            $cartProduct->seller->email,
+                            $cartProduct->seller->phone,
+                            $productEntity
+                        ); // new seller entity for admin mail to fill its data
+                        $sellerEntity->addSeller($sellerEntityForAdminMail);
+                    } else {
+                        $seller->addProduct($productEntity); // new seller entity for admin mail to fill its data
+                    }
+                }
+            }
+
+            // calculate reciepent details for each seller
+            foreach ($sellerEntity->getSellers() as $seller) {
+                $seller->setShipping($this->shipping);
+                $seller->setDiscount($this->discount);
+                $seller->setSubTotal($this->sellerSubTotaltCalcs($seller->getProducts()));
+                $seller->setTotal(($seller->getSubTotal() * (1 - ($this->discount / 100))) + $seller->getShipping());
+            }
             $this->sellerEntity = $sellerEntity; // assign the modified clone to the original seller entity to include added data
+            $this->adminEntity = $adminEntity; // assign the modified clone to the original seller entity to include added data
+
         }
         // private string $adminEmail;
         $this->adminEntity->setAdminEmail($this->admin->email);
@@ -176,8 +209,23 @@ class PreprareOrderMailDataService
         $this->sellerEntity->setWebsiteEmail($this->webisteSetting->email);
     }
 
-    private function prepareSeller($sellerName, $shopName, $sellerEmail, $sellerPhone, $sellerProduct)
-    {
+    /**
+     * prepareSeller
+     *
+     * @param  mixed $sellerName
+     * @param  mixed $shopName
+     * @param  mixed $sellerEmail
+     * @param  string $sellerPhone
+     * @param  ProductEntity $sellerProduct
+     * @return OrderSellerEntity
+     */
+    private function prepareSeller(
+        string $sellerName,
+        string $shopName,
+        string $sellerEmail,
+        string $sellerPhone,
+    ProductEntity $sellerProduct
+    ){
         $sellerEntityForAdminMail = new OrderSellerEntity(); // new seller entity for admin mail to fill its data
         $sellerEntityForAdminMail->setSellerName($sellerName);
         $sellerEntityForAdminMail->setSellerShopName($shopName);
@@ -185,6 +233,21 @@ class PreprareOrderMailDataService
         $sellerEntityForAdminMail->setSellerPhone($sellerPhone);
         $sellerEntityForAdminMail->addProduct($sellerProduct);
         return $sellerEntityForAdminMail;
+    }
+
+    /**
+     * sellerSubTotaltCalcs
+     *
+     * @param  array $products
+     * @return float
+     */
+    private function sellerSubTotaltCalcs(array $products)
+    {
+        $subtotal = 0;
+        foreach ($products as $product) {
+            $subtotal += $product->getPrice() * $product->getQuantity();
+        }
+        return $subtotal;
     }
 
     /**

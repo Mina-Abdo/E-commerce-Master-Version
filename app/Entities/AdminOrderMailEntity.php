@@ -27,8 +27,6 @@ class AdminOrderMailEntity implements AdminOrderMailEntityInterface
     private string $adminEmail;
     private string $paymentMethod;
 
-
-
     /**
          * getUserName
          *

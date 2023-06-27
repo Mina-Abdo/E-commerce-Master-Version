@@ -10,9 +10,10 @@ class OrderSellerEntity implements OrderSellerInterface
     private string $sellerShopName;
     private string $sellerEmail;
     private string $sellerPhone;
-
-
-
+    private float $total;
+    private float $subTotal;
+    private float $discount;
+    private float $shipping;
 
     /**
      * addSeller
@@ -109,4 +110,83 @@ class OrderSellerEntity implements OrderSellerInterface
     {
         $this->sellerPhone = $sellerPhone;
     }
+
+    /**
+         * getTotal
+         *
+         * @return float
+         */
+        public function getTotal(): float
+        {
+            return $this->total;
+        }
+        /**
+             * setTotal
+             *
+             * @param  mixed $total
+             * @return void
+             */
+        public function setTotal(float $total): void
+        {
+            $this->total = $total;
+        }
+        /**
+             * getSubTotal
+             *
+             * @return float
+             */
+        public function getSubTotal(): float
+        {
+            return $this->subTotal;
+        }
+        /**
+             * setSubTotal
+             *
+             * @param  mixed $subTotal
+             * @return void
+             */
+        public function setSubTotal(float $subTotal): void
+        {
+            $this->subTotal = $subTotal;
+        }
+        /**
+             * getDiscount
+             *
+             * @return float
+             */
+        public function getDiscount(): float
+        {
+            return $this->discount;
+        }
+        /**
+             * setDiscount
+             *
+             * @param  mixed $discount
+             * @return void
+             */
+        public function setDiscount(float $discount): void
+        {
+            $this->discount = $discount;
+        }
+        /**
+             * getShipping
+             *
+             * @return float
+             */
+        public function getShipping(): float
+        {
+            return $this->shipping;
+
+        }
+        /**
+             * setShipping
+             *
+             * @param  mixed $shipping
+             * @return void
+             */
+        public function setShipping(float $shipping): void
+        {
+            $this->shipping = $shipping;
+
+        }
 }

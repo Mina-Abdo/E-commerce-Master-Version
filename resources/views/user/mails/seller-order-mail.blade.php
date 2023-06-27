@@ -163,7 +163,7 @@
                                 <p>
                                     {{ $sellerMailData->getUserName() }}
                                 </p>
-                                <p style="font-size: 2vw">
+                                <p style="font-size: 1.3rem">
                                     {{ $sellerMailData->getUserAddress() }}
 
                                 </p>
@@ -196,7 +196,7 @@
             </thead>
 
             <tbody>
-                @foreach ($sellerMailData->getProducts() as $product)
+                @foreach ($seller->getProducts() as $product)
                     <tr class="item">
                         <td style="text-align: center;"> {{ $product->getCode() }} </td>
                         <td style="text-align: center;">
@@ -221,14 +221,14 @@
                     </tr>
                 @endforeach
                 <tr class="total">
-                    <td colspan="9"> </td>
+                    <td colspan="4"> </td>
                     <th>Sub Total</th>
-                    <td style="text-align: center;">{{ $sellerMailData->getSubTotal() }}</td>
+                    <td style="text-align: center;">{{ $seller->getSubTotal() }}</td>
                 </tr class="total">
                 <!-- end tr -->
                 @if ($sellerMailData->getCoupon())
                     <tr class="total">
-                        <td colspan="9"> </td>
+                        <td colspan="4"> </td>
                         <th>Coupon applied :</th>
                         <td style="text-align: center;">{{$sellerMailData->getCoupon()->code}}</td>
                     </tr>
@@ -238,21 +238,21 @@
                     <tr class="total">
                         <td colspan="4"> </td>
                         <th>Discount :</th>
-                        <td style="text-align: center;">- {{ $userMailData->getSubtotal() * $userMailData->getDiscount() }}</td>
+                        <td style="text-align: center;">- {{ $seller->getSubtotal() * $seller->getDiscount() }}</td>
                     </tr>
                 @endif
 
                 <!-- end tr -->
                 <tr class="total">
-                    <td colspan="9"> </td>
+                    <td colspan="4"> </td>
                     <th>Shipping Charge :</th>
-                    <td style="text-align: center;">{{$sellerMailData->getShipping()}} </td>
+                    <td style="text-align: center;">{{$seller->getShipping()}} </td>
                 </tr>
                 <!-- end tr -->
                 <tr class="total">
-                    <td colspan="9"> </td>
+                    <td colspan="4"> </td>
                     <th>Total</th>
-                    <td style="text-align: center;">{{$sellerMailData->getTotal()}} </td>
+                    <td style="text-align: center;">{{$seller->getTotal()}} </td>
                 </tr>
             </tbody>
         </table>
