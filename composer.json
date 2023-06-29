@@ -7,6 +7,9 @@
     "require": {
         "php": "^8.0.2",
         "ext-gd": "*",
+        "anhskohbo/no-captcha": "^3.5",
+        "arcanedev/no-captcha": "^13.0",
+        "biscolab/laravel-recaptcha": "^6.0",
         "codezero/laravel-unique-translation": "^4.1",
         "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.2",
@@ -14,6 +17,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "laravelcollective/html": "^6.4",
         "mcamara/laravel-localization": "^1.7",
         "spatie/laravel-medialibrary": "10.7.12",
         "spatie/laravel-sluggable": "^3.4",

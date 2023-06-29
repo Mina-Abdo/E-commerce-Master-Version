@@ -4,6 +4,7 @@
 
 @section('header')
     @include('user.layouts.partials.header')
+
 @endsection
 
 @section('footer')
@@ -25,7 +26,7 @@
 @section('content')
     @parent
     <div class="" style="background-image: url({{ asset('frontend-assets/images/about-02.jpg') }}); height: 100vh; background-size: cover;">
-        <div class="container d-flex justify-content-center" style="margin-top: 50px">
+        <div class="container d-flex justify-content-center mb-4" style="margin-top: 50px">
             <div class="w-50 shadow p-3 mb-5 bg-white" style="margin-top: 100px">
                 <div class="card-body register-card-body">
                     <div class="mb-2" style="text-align: center">
@@ -77,6 +78,10 @@
                                     {{ __('user.auth.login.forgot_password') }}
                                 </a>
                             @endif
+                        </div>
+                        <div class="mb-3 form-check d-flex justify-content-around  mt-4">
+                            {!! NoCaptcha::renderJs() !!}
+                            {!! NoCaptcha::display() !!}
                         </div>
 
                         <button class="button-general">
